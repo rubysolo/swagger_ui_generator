@@ -1,5 +1,6 @@
 require 'test_helper'
 require 'generators/swagger_ui_generator/install/install_generator'
+require 'nokogiri'
 
 class InstallGeneratorTest < Rails::Generators::TestCase
   tests SwaggerUiGenerator::Generators::InstallGenerator
