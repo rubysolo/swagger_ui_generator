@@ -19,28 +19,28 @@ rails server.  If you use [swagger-docs](https://github.com/richhollis/swagger-d
 to dynamically generate the API spec files, you can use an initializer something
 like:
 
-    ```ruby
-    endpoints = {
-      "production"  => "http://api.my-service.com",
-      "staging"     => "http://api-staging.my-service.com",
-      "development" => "http://localhost:3000",
-    }
+```ruby
+endpoints = {
+  "production"  => "http://api.my-service.com",
+  "staging"     => "http://api-staging.my-service.com",
+  "development" => "http://localhost:3000",
+}
 
-    Swagger::Docs::Config.register_apis({
-      "1.0" => {
-        api_extension_type:  :json,
-        api_file_path:       "public/swagger/",
-        base_path:           "#{ endpoints[Rails.env] }",
-        clean_directory:     true
-      }
-    })
+Swagger::Docs::Config.register_apis({
+  "1.0" => {
+    api_extension_type:  :json,
+    api_file_path:       "public/swagger/",
+    base_path:           "#{ endpoints[Rails.env] }",
+    clean_directory:     true
+  }
+})
 
-    class Swagger::Docs::Config
-      def self.transform_path(path)
-        "swagger/#{ path }"
-      end
-    end
-    ```
+class Swagger::Docs::Config
+  def self.transform_path(path)
+    "swagger/#{ path }"
+  end
+end
+```
 
 This will create `api-docs.json` and an additional spec file per endpoint in the
 `public/swagger` directory.
